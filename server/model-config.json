@@ -34,5 +34,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Evento": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Teatro": {
+    "dataSource": "db",
+    "public": true
   }
 }
