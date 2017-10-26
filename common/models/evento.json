@@ -29,6 +29,10 @@
     "sinopsis": {
       "type": "string",
       "required": true
+    },
+    "categoria": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
