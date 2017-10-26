@@ -23,7 +23,6 @@ module.exports = function(app) {
       if (err) throw err;
       console.log('Modelos creados: Teatro');
     });
-    console.log('TeatroId: ' + resultadoTeatros[0].id);
     const eventos = [
       {
         'nombre': 'El fantasma de la Opera',
