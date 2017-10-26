@@ -4,11 +4,11 @@
     "connector": "memory"
   },
   "mongodb": {
-    "name": "mongodb",    
     "host": "34.236.34.152",
     "port": 27017,
     "database": "chiketto",
-    "connector": "mongodb" ,
-    "allowExtendedOperators" : true
+    "name": "mongodb",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
   }
 }
