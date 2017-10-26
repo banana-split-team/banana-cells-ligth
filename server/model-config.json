@@ -14,25 +14,25 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mongodb"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "entrada": {
@@ -40,11 +40,15 @@
     "public": true
   },
   "Evento": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Teatro": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "suscripcion": {
+    "dataSource": "mongodb",
     "public": true
   },
   "descuento": {
