@@ -46,5 +46,9 @@
   "Teatro": {
     "dataSource": "db",
     "public": true
+  },
+  "descuento": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

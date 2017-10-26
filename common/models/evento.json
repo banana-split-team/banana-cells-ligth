@@ -41,6 +41,11 @@
       "type": "belongsTo",
       "model": "Teatro",
       "foreignKey": ""
+    },
+    "descuentos": {
+      "type": "hasMany",
+      "model": "descuento",
+      "foreignKey": "eventoDescuento"
     }
   },
   "acls": [],
