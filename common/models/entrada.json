@@ -1,0 +1,49 @@
+{
+  "name": "entrada",
+  "plural": "entradas",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "BA_CON_VOS_Y_BANCO_CIUDAD": {
+      "type": "number"
+    },
+    "CARTELERA": {
+      "type": "number",
+      "required": true
+    },
+    "CLUB_NACION": {
+      "type": "number"
+    },
+    "DISCAPACIDAD": {
+      "type": "number"
+    },
+    "INVITADOS": {
+      "type": "number"
+    },
+    "JUB_Y_EST": {
+      "type": "number"
+    },
+    "LOCALIDADES_VENDIDAS": {
+      "type": "number"
+    },
+    "OBRA": {
+      "type": "string",
+      "required": true
+    },
+    "PERIODO": {
+      "type": "number",
+      "required": true
+    },
+    "TEATRO": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
