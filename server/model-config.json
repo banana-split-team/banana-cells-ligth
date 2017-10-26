@@ -40,14 +40,18 @@
     "public": true
   },
   "Evento": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Teatro": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "suscripcion": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "descuento": {
     "dataSource": "mongodb",
     "public": true
   }
