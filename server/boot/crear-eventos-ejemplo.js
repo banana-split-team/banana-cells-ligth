@@ -37,6 +37,18 @@ module.exports = function(app) {
         'sinopsis': "El fantasma de la ópera (Le Fantôme de l'Opéra) es una...",
         'teatroId': resultadoTeatros[0].id,
       },
+      {
+        'nombre': 'LA FARSA DE LOS AUSENTES',
+        'director': 'POMPEYO AUDIVERT',
+        'precios': [
+          200,
+        ],
+        'funciones': [
+          '2017-10-26T22:30:00.000Z',
+        ],
+        'sinopsis': 'SOBRE LOS RESTOS DE UN PAISAJE NACIONAL DERRUMBADO',
+        'teatroId': resultadoTeatros[0].id,
+      },
     ];
     Evento.create(eventos, function(err) {
       if (err) throw err;
