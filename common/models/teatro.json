@@ -1,0 +1,31 @@
+{
+  "name": "Teatro",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "direccion": {
+      "type": "string",
+      "required": true
+    },
+    "geolocalizacion": {
+      "type": "geopoint"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "eventos": {
+      "type": "hasMany",
+      "model": "Evento",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
