@@ -1,0 +1,44 @@
+{
+  "name": "Evento",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "director": {
+      "type": "string",
+      "required": true
+    },
+    "precios": {
+      "type": [
+        "number"
+      ],
+      "required": true
+    },
+    "funciones": {
+      "type": [
+        "date"
+      ],
+      "required": true
+    },
+    "sinopsis": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "teatro": {
+      "type": "belongsTo",
+      "model": "Teatro",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
