@@ -36,6 +36,7 @@ module.exports = function(app) {
         ],
         'sinopsis': "El fantasma de la ópera (Le Fantôme de l'Opéra) es una...",
         'teatroId': resultadoTeatros[0].id,
+        'categoria': 'TEATRO',
       },
       {
         'nombre': 'LA FARSA DE LOS AUSENTES',
@@ -48,6 +49,7 @@ module.exports = function(app) {
         ],
         'sinopsis': 'SOBRE LOS RESTOS DE UN PAISAJE NACIONAL DERRUMBADO',
         'teatroId': resultadoTeatros[0].id,
+        'categoria': 'TEATRO',
       },
     ];
     Evento.create(eventos, function(err) {
