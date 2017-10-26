@@ -35,6 +35,8 @@
     "dataSource": "db",
     "public": false
   },
+  "entrada": {
+    "dataSource": "mongodb",
   "Evento": {
     "dataSource": "db",
     "public": true
