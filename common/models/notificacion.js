@@ -2,21 +2,18 @@
 
 module.exports = function(Notificacion) {
     // send an email
-    console.log('entre a email ');
+  // Ante la creacion/modificacion de notificacion.
+  Notificacion.on('changed', function(inst) {
+    console.log('Envia notificacion.', inst);
+    // => model with id 1 has been changed
 
-    Notificacion.sendEmail = function(cb) {
-      console.log('entre a sendmail ');
-            
-      Notificacion.app.models.Email.send({
-        to: 'reyayelen@gmail.com',
-        from: 'chiketo.avisos@gmail.com',
-        subject: 'my subject',
-        text: 'my text',
-        html: 'my <em>html</em>'
-      }, function(err, mail) {
-        console.log('email sent!');
-        cb(err);
-      });
-    }
-    //Notificacion.sendEmail(null);
-  };
+    Notificacion.app.models.Email.send({
+      to: inst.mail,
+      from: 'chiketo.avisos@gmail.com',
+      subject: 'Tenemos novedades interesantes para vos!',
+      text: inst.texto,
+    }, function(err, mail) {
+      console.log('email sent!');
+    });
+  });
+};

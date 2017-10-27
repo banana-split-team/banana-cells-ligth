@@ -9,10 +9,14 @@
   "properties": {
     "tipo": {
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "mail"
     },
     "texto": {
+      "type": "string",
+      "required": true
+    },
+    "mail": {
       "type": "string",
       "required": true
     }
