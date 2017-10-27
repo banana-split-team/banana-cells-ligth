@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb"
+    "dataSource": "mongodb",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "mongodb",
@@ -52,6 +53,10 @@
     "public": true
   },
   "descuento": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "usuario": {
     "dataSource": "mongodb",
     "public": true
   }
