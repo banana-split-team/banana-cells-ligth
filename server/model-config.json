@@ -54,5 +54,9 @@
   "descuento": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "usuario": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
