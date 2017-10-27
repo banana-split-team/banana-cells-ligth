@@ -45,7 +45,12 @@
     "descuentos": {
       "type": "hasMany",
       "model": "descuento",
-      "foreignKey": "eventoDescuento"
+      "foreignKey": ""
+    },
+    "suscripciones": {
+      "type": "hasMany",
+      "model": "suscripcion",
+      "foreignKey": ""
     }
   },
   "acls": [],
