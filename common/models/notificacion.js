@@ -10,9 +10,11 @@ module.exports = function(Notificacion) {
     Notificacion.app.models.Email.send({
       to: inst.mail,
       from: 'chiketo.avisos@gmail.com',
-      subject: 'Tenemos novedades interesantes para vos!',
-      text: inst.texto,
-    }, function(err, mail) {
+      subject: 'Novedades Chiketto',
+      // text: inst.texto,
+      html: 'Tenemos novedades interesantes para vos!<br> Enterate <a href=' +
+        inst.link + '>aquí</a>!'}
+    , function(err, mail) {
       console.log('email sent!');
       console.log(process.env.CHIKETTO_CLIENT_URL);
     });
