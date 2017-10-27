@@ -14,6 +14,7 @@ module.exports = function(Notificacion) {
       text: inst.texto,
     }, function(err, mail) {
       console.log('email sent!');
+      console.log(process.env.CHIKETTO_CLIENT_URL);
     });
   });
 };

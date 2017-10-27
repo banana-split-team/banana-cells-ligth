@@ -14,7 +14,7 @@ module.exports = function(Descuento) {
       console.log(JSON.stringify(dataEventos));
       dataEventos.forEach(function(dataEvento) {
         suscripcion.scope('suscripcionAlEvento'
-        , {where: {eventoId: dataEvento._id}});
+        , {where: {eventoId: dataEvento.id}});
         suscripcion.suscripcionAlEvento(function(err, dataSuscripciones) {
           dataSuscripciones.forEach(function(dataSuscripcion) {
             console.log(JSON.stringify(dataSuscripcion));
@@ -23,7 +23,9 @@ module.exports = function(Descuento) {
               'tipo': 'mail',
               'texto': 'Hoy novedades sobre el ' + dataDescuento.descripcion +
               ' del evento ' + dataEvento.nombre,
-              'mail': dataSuscripcion.email};
+              'mail': dataSuscripcion.email,
+              'link': process.env.CHIKETTO_CLIENT_URL + 'detalle/' +
+                dataEvento.id};
             notificacion.create(aviso);
           });
         });
