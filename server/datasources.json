@@ -14,8 +14,7 @@
   "Email": {
     "name": "Email",
     "connector": "mail",
-    "transports": 
-    [
+    "transports": [
       {
         "type": "smtp",
         "host": "smtp.gmail.com",
