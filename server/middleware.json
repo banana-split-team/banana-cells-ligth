@@ -33,6 +33,15 @@
   "session": {},
   "auth": {},
   "parse": {},
+  "routes:before": {
+    "./middleware/generar-notificaciones": {
+      "enabled": false,
+      "paths": [
+        "/api/descuentos",
+        "/api/eventos/*/descuentos"
+      ]
+    }
+  },
   "routes": {
     "loopback#rest": {
       "paths": [

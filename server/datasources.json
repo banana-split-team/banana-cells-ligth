@@ -10,5 +10,24 @@
     "name": "mongodb",
     "connector": "mongodb",
     "allowExtendedOperators": true
+  },
+  "Email": {
+    "name": "Email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": false,
+        "port": 587,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "chiketto.avisos",
+          "pass": "bananasplit"
+        }
+      }
+    ]
   }
 }
