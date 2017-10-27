@@ -13,7 +13,24 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "notificacionDelUsuario": {
+      "type": "hasMany",
+      "model": "notificacion",
+      "foreignKey": ""
+    }
+  },
+  "acls": [ {
+    "principalType": "ROLE",
+    "principalId": "$owner",
+    "permission": "ALLOW",
+    "property": "__get__notificacionDelUsuario"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "$authenticated",
+    "permission": "ALLOW",
+    "property": "__create__notificacionDelUsuario"
+  }],
+  
   "methods": {}
 }

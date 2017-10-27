@@ -59,5 +59,12 @@
   "usuario": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "notificacion": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "Email"
   }
 }
