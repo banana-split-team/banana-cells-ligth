@@ -1,0 +1,149 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-collapse-button/iron-collapse-button.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="my-detalle">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      ;
+      google-map {
+        height: 300px;
+      }
+
+      span0 {
+        font-weight: lighter;
+        position: relative;
+        float: right;
+      }
+
+      ;
+
+       :span1 {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+      }
+    </style>
+
+    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+    </app-location>
+
+    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
+    </app-route>
+    <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}">
+    </app-route>
+
+    <div class="card">
+      <h1>{{evento.nombre}}</h1>
+      <p>Dirección: {{evento.director}}</p>
+      <hr>
+      <span0>
+        <div class="card gris">
+            <template is="dom-repeat" items="{{evento.precios}}" as="item">
+                <p> $ {{item}} </p>
+             </template>
+       </div>
+      </span0>
+      <div>
+        <span1>
+            
+          <p> Próxima funciones </p>
+          <p> {{fechaFuncion}} </p>       
+
+        </span1>
+        <p> <span> No te la pierdas! </span> </p>
+        <hr>
+      </div>
+      <div>
+        <iron-collapse-button>
+          <div slot="collapse-trigger" class="flex">{{Teatro.nombre}} - {{Teatro.direccion}}</div>
+          <div slot="collapse-content">
+            <ul>
+       
+              <div class="card">
+                <google-map fit-to-marker latitude={{Teatro.geolocalizacion.lng}} longitude={{Teatro.geolocalizacion.lat}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" disable-default-ui draggable="false"
+                  zoom="15">
+                  <google-map-marker latitude={{Teatro.geolocalizacion.lng}} longitude={{Teatro.geolocalizacion.lat}} draggable="false"></google-map-marker>
+                </google-map>
+              </div>
+            </ul>
+          </div>
+        </iron-collapse-button>
+
+      </div>
+      <hr>
+      <h2>Sinopsis</h2>
+      <p>{{evento.sinopsis}}</p>
+    </div>
+    <iron-ajax id="ajaxDetalle" auto url="http://{{host}}:3000/api/Eventos/{{subrouteData.id}} " params='' handle-as="json"
+      on-response="respuestaDetalle" debounce-duration="300"></iron-ajax>
+      <iron-ajax id="ajaxDetalleT" auto url="http://{{host}}:3000/api/Teatros/{{evento.teatroId}} " params='' handle-as="json"
+      on-response="respuestaDetalleT" debounce-duration="300"></iron-ajax>
+  </template>
+
+  <script>
+    class MyDetalle extends Polymer.Element {
+      static get is() {
+        return 'my-detalle';
+      }
+      static get properties(){                                                                                                                                                            
+        return {
+          /**
+           * Description for prop
+           */
+          host: {
+            type: String,
+            value: function (){return location.hostname },
+          fechaFuncion: {
+            type: String
+            }  
+          }
+        }
+      }
+      respuestaDetalle(res) {
+        console.log(res);
+        this.evento = res.detail.__data.response;
+        this.fechaFuncion = this.formatDate(this.evento.funciones); 
+        console.log(this.evento.fechaFuncion);
+      }
+      respuestaDetalleT(res) {
+        console.log(res);
+        this.Teatro = res.detail.__data.response;
+      }
+      toggle() {
+        this.$.collapse.toggle();
+      };
+
+      formatDate(date) {
+ 
+      return date[0];}
+    
+    }
+    window.customElements.define(MyDetalle.is, MyDetalle);
+  </script>
+</dom-module>

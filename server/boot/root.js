@@ -1,8 +1,16 @@
 'use strict';
 
-module.exports = function(server) {
-  // Install a `/` route that returns server status
-  var router = server.loopback.Router();
-  router.get('/', server.loopback.status());
-  server.use(router);
+module.exports = function(app) {
+  app.get('/v*', function(req, res) {
+    res.sendFile(app.get('indexFile'));
+  });
+  app.get('/view2', function(req, res) {
+    res.sendFile(app.get('indexFile'));
+  });
+  app.get('/view3', function(req, res) {
+    res.sendFile(app.get('indexFile'));
+  });
+  app.get('/', function(req, res) {
+    res.sendFile(app.get('indexFile'));
+  });
 };

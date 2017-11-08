@@ -1,13 +1,23 @@
 {
   "db": {
+    "host": "ds113795.mlab.com",
+    "port": 13795,
+    "url": "",
+    "database": "bananasplit",
+    "password": "bsbbva2017",
     "name": "db",
-    "connector": "memory"
+    "user": "bananasplit",
+    "connector": "mongodb",
+    "allowExtendedOperators": true
   },
   "mongodb": {
-    "host": "34.236.34.152",
-    "port": 27017,
-    "database": "chiketto",
-    "name": "mongodb",
+    "host": "ds113795.mlab.com",
+    "port": 13795,
+    "url": "",
+    "database": "bananasplit",
+    "password": "bsbbva2017",
+    "name": "db",
+    "user": "bananasplit",
     "connector": "mongodb",
     "allowExtendedOperators": true
   },

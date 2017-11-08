@@ -1,0 +1,89 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-eventos">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        padding: 10px;
+      }
+      a,.card{
+        text-decoration-line: none;
+      }
+      h1{
+        font-size: 1em;
+      }
+      h3{
+        font-size: 0.8em;
+      }
+      .card > *{
+        margin: 0px;
+      }
+
+    </style>
+    <template is="dom-repeat" items="{{eventos}}">
+      <a href="/detalle/{{item.id}}">
+        <div class="card">
+          <h1>{{item.nombre}}</h1>
+          <h3>{{item.categoria}}</h3>
+        </div>
+      </a>
+    </template>
+
+    <iron-ajax
+              id="ajaxEventos"
+              auto
+              url="http://{{host}}:3000/api/Eventos"
+              params=''
+              handle-as="json"
+              on-response="respuestaEventos"
+              debounce-duration="300"></iron-ajax>
+  </template>
+
+  <script>
+    class MyView1 extends Polymer.Element {
+      static get is() {
+        return 'my-eventos';
+      }
+      static get properties() {
+        return {
+          /**
+           * Array de eventos
+           */
+          eventos: {
+            type: Array,
+            value: function () {
+              return []
+            }
+          },
+          /**
+           * Description for prop
+           */
+          host: {
+            type: String,
+            value: function (){return location.hostname }
+          }
+        }
+      }
+      respuestaEventos(res){
+        console.log(res);
+        this.eventos= res.detail.__data.response;
+      }
+    }
+
+    window.customElements.define(MyView1.is, MyView1);
+  </script>
+</dom-module>
