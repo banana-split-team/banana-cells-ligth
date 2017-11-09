@@ -34,14 +34,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     </style>
-    <div>eventos</div>
-    <template is="dom-repeat" items="{{eventos}}">
-      <a href="/detalle/{{item.id}}">
-        <div class="card">
-          <h1>{{item.nombre}}</h1>
-          <h3>{{item.categoria}}</h3>
+    <div>eventos-page</div>
+    <template is="dom-repeat" items="{{eventos}}" as="evento">
+     <!-- <a href="/detalle/{{item.id}}">-->
+        <div on-click="seleccionarEvento" class="card">
+          <h1>{{evento.nombre}}</h1>
+          <h3>{{evento.categoria}}</h3>
         </div>
-      </a>
+     <!-- </a>-->
     </template>
 
     <iron-ajax
@@ -82,6 +82,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       respuestaEventos(res){
         console.log(res);
         this.eventos= res.detail.__data.response;
+      }
+      seleccionarEvento(e){
+        debugger;
+        const evento = e.model.evento;
+        const detalle = {
+          id: evento.id
+        }
+        console.log("eee: ", e)
       }
     }
 

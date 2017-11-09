@@ -66,7 +66,7 @@
   
       return [
         createRoute('eventos', '/', {}, {}),
-        createRoute('user-posts', '/user/:user-id/:user-name/posts', {}, ROUTE_HOOKS),
+        createRoute('detalle', '/detalle/:evento-id', {}, ROUTE_HOOKS),
         createRoute('post-comments', '/posts/:post-id/:post-name/comments', {}, {}),
         createRoute('about', '/about', {private: true}, ROUTE_HOOKS),
         createRoute('products', '/products', {}, { onResolve: productsOnResolveHook }),
