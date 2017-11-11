@@ -7,7 +7,7 @@
       pageRender: {
         mainNode: '#app__container',
         componentPath: '/src/pages',
-        progressive: true,
+        progressive: false,
         maxSimultaneousPages: 6
       },
       router: {
@@ -67,7 +67,7 @@
       return [
         createRoute('eventos', '/', {}, {}),
         createRoute('detalle', '/detalle/:evento-id', {}, ROUTE_HOOKS),
-        createRoute('post-comments', '/posts/:post-id/:post-name/comments', {}, {}),
+        createRoute('teatroscercanos', '/teatroscercanos', {}, ROUTE_HOOKS),
         createRoute('about', '/about', {private: true}, ROUTE_HOOKS),
         createRoute('products', '/products', {}, { onResolve: productsOnResolveHook }),
         createRoute('products.accounts', '/accounts', {}, {}),

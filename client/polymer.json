@@ -3,9 +3,9 @@
   //"shell": "src/my-app.html",
   "shell": "src/app-shell.html",
   "fragments": [
-    "src/my-detalle.html",
-    "src/my-eventos.html",
-    "src/my-login.html",
+    "src/pages/detalle.html",
+    "src/pages/eventos.html",
+    "src/pages/teatroscercanos.html",
     "src/my-signup.html",
     "src/my-teatroscercanos.html",
     "src/my-view404.html"
@@ -16,7 +16,9 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/*.js"
+    "bower_components/webcomponentsjs/*.js",
+    "bower_components/cells/dist/cells-static.min.js",
+    "src/app.js"
   ],
   "lint": {
     "rules": ["polymer-2"]
