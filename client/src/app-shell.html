@@ -5,8 +5,6 @@
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -14,14 +12,6 @@
 <link rel="import" href="../bower_components/global-variable/global-data.html">
 <link rel="import" href="../bower_components/global-variable/global-data.html">
 <link rel="import" href="my-icons.html">
-
-
-<link rel="lazy-import" href="my-eventos.html">
-<link rel="lazy-import" href="my-detalle.html">
-<link rel="lazy-import" href="my-login.html">
-<link rel="lazy-import" href="my-signup.html">
-<link rel="lazy-import" href="my-teatroscercanos.html">
-<link rel="lazy-import" href="my-view404.html">
 
 <script src="./app.js"></script>
 
@@ -91,14 +81,13 @@
             <hr>
          </div>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="eventos" href="[[rootPath]]eventos">Inicio</a>
+          <a name="eventos" href="/#/eventos">Inicio</a>
           <div hidden$="[[user.logueado]]">
-            <a name="login" href="[[rootPath]]login" hidden$="[[hiden]]">Login</a>
-            <a name="signup" href="[[rootPath]]signup" hidden$="[[user.logueado]]">Signup</a>
+            <a name="login" href="/#/login" hidden$="[[hiden]]">Login</a>
+            <a name="signup" href="/#/signup" hidden$="[[user.logueado]]">Signup</a>
           </div>
 
-
-          <a name="teatroscercanos" href="[[rootPath]]teatroscercanos">¿Que teatros hay cerca mio?</a>
+          <a name="teatroscercanos" href="/#/teatroscercanos">¿Que teatros hay cerca mio?</a>
 
         </iron-selector>
       </app-drawer>
@@ -114,14 +103,7 @@
         </app-header>
 
         <div id="app__container"></div>
-        <!--<iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <my-eventos name="eventos"></my-eventos>
-          <my-detalle name="detalle"></my-detalle>
-          <my-login name="login"></my-login>
-          <my-signup name="signup"></my-signup>
-          <my-teatroscercanos name="teatroscercanos"></my-teatroscercanos>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>-->
+
       </app-header-layout>
     </app-drawer-layout>  
     
@@ -136,16 +118,6 @@
 
       static get properties() {
         return {
-          page: {
-            type: String,
-            reflectToAttribute: true,
-            observer: '_pageChanged',
-          },
-          routeData: Object,
-          subroute: String,
-          // This shouldn't be neccessary, but the Analyzer isn't picking up
-          // Polymer.Element#rootPath
-          rootPath: String,
           hiden: {
             type: Boolean,
             value: true
@@ -161,40 +133,6 @@
             }
           },
         };
-      }
-
-      static get observers() {
-        return [
-          '_routePageChanged(routeData.page)',
-        ];
-      }
-
-      _routePageChanged(page) {
-        console.log("campio la ruta", this.route, this.routeData)
-        console.log("usuario??", this.$.globalData.get("user"))
-        this.user = this.$.globalData.get("user");
-        // If no page was found in the route data, page will be an empty string.
-        // Default to 'eventos' in that case.
-        this.page = page || 'eventos';
-
-        // Close a non-persistent drawer when the page & route are changed.
-        if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
-        }
-      }
-
-      _pageChanged(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        Polymer.importHref(
-          resolvedPageUrl,
-          null,
-          this._showPage404.bind(this),
-          true);
-      }
-
-      _showPage404() {
-        this.page = 'view404';
       }
     }
 
