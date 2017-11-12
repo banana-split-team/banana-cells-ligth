@@ -32,13 +32,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <geo-location latitude="{{lat}}" longitude="{{lon}}"></geo-location>
 
     <div class="card">
-      <google-map map={{map}} latitude=[[lat]] longitude=[[lon]] api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" disable-default-ui
-        draggable="false" zoom="13">
-        <template is="dom-repeat" items="{{teatros}}" as="item">
-          <google-map-marker map={{map}} latitude={{item.geolocalizacion.lng}} longitude={{item.geolocalizacion.lat}} draggable="false"></google-map-marker>
-        </template>  
-      </google-map>
-      <google-map-marker map={{map}} latitude={{lat}} longitude={{lon}} draggable="false"></google-map-marker>
+      <google-map map={{map}} latitude=[[lat]] longitude=[[lon]] api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc"
+        draggable="false" zoom="11">
+      <template is="dom-repeat" items="{{teatros}}" as="item">
+        <google-map-marker latitude={{item.geolocalizacion.lng}} longitude={{item.geolocalizacion.lat}} draggable="false" label={{item.nombre}}></google-map-marker>
+      </template>  
+    </google-map>
+      <google-map-marker map={{map}} latitude={{lat}} longitude={{lon}} draggable="false" label="Yo"></google-map-marker>
 
     </div>
 
