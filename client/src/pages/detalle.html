@@ -8,13 +8,13 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-collapse-button/iron-collapse-button.html">
-<link rel="import" href="../bower_components/google-map/google-map.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-collapse-button/iron-collapse-button.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../shared-styles.html">
 
 
 <dom-module id="detalle-page">
@@ -24,6 +24,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
 
         padding: 10px;
+      }
+      :host([hidden]) {
+        display: none !important;
       }
 
       span {
