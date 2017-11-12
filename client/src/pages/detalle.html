@@ -17,7 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 
 
-<dom-module id="my-detalle">
+<dom-module id="detalle-page">
   <template>
     <style include="shared-styles">
        :host {
@@ -59,6 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </app-route>
 
     <div class="card">
+      <div>subroute {{subrouteData.id}},  param [[params.evento-id]] </div>
       <h1>{{evento.nombre}}</h1>
       <p>Dirección: {{evento.director}}</p>
       <hr>
@@ -107,15 +108,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class MyDetalle extends Polymer.Element {
+    class DetallePage extends Polymer.Element {
       static get is() {
-        return 'my-detalle';
+        return 'detalle-page';
       }
       static get properties(){                                                                                                                                                            
         return {
           /**
            * Description for prop
            */
+          params:{
+            type:Object,
+            value:{}
+          },
           host: {
             type: String,
             value: function (){return location.hostname },
@@ -144,6 +149,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       return date[0];}
     
     }
-    window.customElements.define(MyDetalle.is, MyDetalle);
+    window.customElements.define(DetallePage.is, DetallePage);
   </script>
 </dom-module>
