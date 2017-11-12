@@ -82,5 +82,13 @@
   "userIdentity": {
     "dataSource": "db",
     "public": false
+  },
+  "cajero": {
+    "dataSource": null,
+    "public": true
+  },
+  "ubicacion": {
+    "dataSource": null,
+    "public": true
   }
 }

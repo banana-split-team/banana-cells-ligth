@@ -1,0 +1,131 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ <google-map-marker latitude="{{latitude}}" longitude="{{longitude}}">
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/google-map/google-map-marker.html">
+<link rel="import" href="../../bower_components/google-map/google-map-point.html">
+<link rel="import" href="../../bower_components/google-map/google-map-search.html">
+<link rel="import" href="../../bower_components/google-map/google-map-poly.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="cajeros-page">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      google-map {
+        height: 600px;
+      }
+
+    </style>
+    <div>cajeros-page</div>
+    
+     <google-map map={{map}} latitude={{PLaM}} longitude={{PLoM}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" zoom="14">   
+       <template is="dom-repeat" items="{{cajeros.listado.ATM}}" as="marker">
+        <google-map-marker latitude={{marker.ATM.Latitude}} longitude={{marker.ATM.Longitude}} title={{marker.ATM.Nombre}} icon={{icon}}></google-map-marker>
+       </template> 
+    </google-map>
+    <google-map-marker map={{map}} latitude={{LaM}} longitude={{LoM}} label="Yo"></google-map-marker>
+     
+
+
+    <iron-ajax id="Ajax" url="http://localhost:3000/api/cajeros/listado" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+    <iron-ajax id="AjaxL" url="http://localhost:3000/api/ubicaciones/localizacion" handle-as="json" on-response="handleResponseL"
+      debounce-duration="300"></iron-ajax>
+
+  </template>
+
+  <script>
+    class CajerosPage extends Polymer.Element {
+      static get is() {
+        return 'cajeros-page';
+      }
+      static get properties() {
+        return {
+          key: {
+            type: String,
+            value: "KEY"
+          },
+          cajeros: {
+            type: String,
+            value: "KEY"
+          },
+          LaM: Number,
+          LoM: Number,
+          PLaM: Number,
+          PLoM: Number,
+          icon: {
+            type: String,
+            value: "../images/atm.png"
+          },
+          iconP: {
+            type: String,
+            value: "../images/pers.png"
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+        console.log("Entró Cajeros");
+        //busco ubicacion
+        this.$.AjaxL.generateRequest();
+      }
+
+      handleResponse(res) {
+
+        this.cajeros = res.detail.__data.response;
+        console.log(this.cajeros);
+        console.log(JSON.stringify(this.cajeros));
+      }
+
+      handleResponseL(res) {
+        this.loc = res.detail.__data.response;
+
+
+        //hacemos que sea españa...
+        this.LaM = this.loc.localizacion.lat + 74.8;
+        this.LoM = this.loc.localizacion.lng + 54.7;
+        this.PLaM = this.LaM;
+        this.PLoM = this.LoM;
+        console.log(this.loc.localizacion.lat + ' <> ' + this.loc.localizacion.lng);
+        console.log(this.LaM + ' -- ' + this.LoM);
+
+        this.$.Ajax.params = {
+          lat: this.LaM,
+          long: this.LoM
+        };
+        console.log(this.$.Ajax.params);
+        //this.$.Ajax.params = { lat: 40.4164794, long: -3.7050995 };
+        //busco cajeros cerca ubicacion
+        this.$.Ajax.generateRequest();
+      }
+
+
+      listaReady() {
+        console.log(">" + this.results + "<");
+      }
+
+    }
+
+    window.customElements.define(CajerosPage.is, CajerosPage);
+
+  </script>
+
+
+</dom-module>

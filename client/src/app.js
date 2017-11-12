@@ -68,9 +68,7 @@
         createRoute('eventos', '/', {}, {}),
         createRoute('detalle', '/detalle/:evento-id', {}, ROUTE_HOOKS),
         createRoute('teatroscercanos', '/teatroscercanos', {}, ROUTE_HOOKS),
-        createRoute('about', '/about', {private: true}, ROUTE_HOOKS),
-        createRoute('products', '/products', {}, { onResolve: productsOnResolveHook }),
-        createRoute('products.accounts', '/accounts', {}, {}),
+        createRoute('cajeros', '/cajeros', {}, ROUTE_HOOKS)
       ];
     }
   
