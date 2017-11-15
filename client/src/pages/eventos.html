@@ -15,10 +15,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="eventos-page">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles"  >
+   
        :host {
         display: block;
         padding: 10px;
+      }
+      :host([hidden]) {
+        display: none !important;
       }
       a,.card{
         text-decoration-line: none;
@@ -67,7 +71,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           eventos: {
             type: Array,
             value: function () {
-              return []
+              return [{nombre:"nombre del evento",
+              id:"id05",}
+              ]
             }
           },
           /**
@@ -87,9 +93,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         debugger;
         const evento = e.model.evento;
         const detalle = {
-          id: evento.id
+          "evento-id": evento.id
         }
         console.log("eee: ", e)
+        Cells.Router.navigate('detalle', detalle);
+        
+        
       }
     }
 

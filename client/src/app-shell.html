@@ -61,7 +61,7 @@
     <global-variable key="user" value="{{user}}">
     </global-variable>
 
-    <global-data id="globalData" on-set="_onSet" on-subscribe="_onSubscribe" on-unsubscribe="_onUnsubscribe">
+    <!--<global-data id="globalData" on-set="_onSet" on-subscribe="_onSubscribe" on-unsubscribe="_onUnsubscribe">
     </global-data>
 
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
@@ -69,7 +69,7 @@
 
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
-
+  -->
     <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
@@ -81,7 +81,7 @@
             <hr>
          </div>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="eventos" href="/#/eventos">Inicio</a>
+          <a name="eventos" href="/#/">Inicio</a>
           <div hidden$="[[user.logueado]]">
             <a name="login" href="/#/login" hidden$="[[hiden]]">Login</a>
             <a name="signup" href="/#/signup" hidden$="[[user.logueado]]">Signup</a>

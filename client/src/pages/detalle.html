@@ -8,13 +8,13 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-collapse-button/iron-collapse-button.html">
-<link rel="import" href="../bower_components/google-map/google-map.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-collapse-button/iron-collapse-button.html">
+<link rel="import" href="../../bower_components/google-map/google-map.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../shared-styles.html">
 
 
 <dom-module id="detalle-page">
@@ -24,6 +24,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
 
         padding: 10px;
+      }
+      :host([hidden]) {
+        display: none !important;
       }
 
       span {
@@ -50,14 +53,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+    <!--<app-location route="{{route}}" url-space-regex="^[[rootPath]]">
     </app-location>
 
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
     <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}">
     </app-route>
-
+  -->
     <div class="card">
       <div>subroute {{subrouteData.id}},  param [[params.evento-id]] </div>
       <h1>{{evento.nombre}}</h1>
@@ -146,7 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       formatDate(date) {
  
-      return date[0];}
+      return date?date[0]:'';}
     
     }
     window.customElements.define(DetallePage.is, DetallePage);
