@@ -53,14 +53,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+    <!--<app-location route="{{route}}" url-space-regex="^[[rootPath]]">
     </app-location>
 
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
     <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}">
     </app-route>
-
+  -->
     <div class="card">
       <div>subroute {{subrouteData.id}},  param [[params.evento-id]] </div>
       <h1>{{evento.nombre}}</h1>
@@ -149,7 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       formatDate(date) {
  
-      return date[0];}
+      return date?date[0]:'';}
     
     }
     window.customElements.define(DetallePage.is, DetallePage);
