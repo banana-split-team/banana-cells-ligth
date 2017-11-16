@@ -22,7 +22,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         padding: 10px;
       }
-      :host([hidden]) {
+
+       :host([hidden]) {
         display: none !important;
       }
 
@@ -32,26 +33,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <div>teatroscercanos-page</div>
-    <geo-location latitude="{{lat}}" longitude="{{lon}}"></geo-location>
+    <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
 
     <div class="card">
-      <google-map map={{map}} latitude=[[lat]] longitude=[[lon]] api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc"
-        draggable="false" zoom="11">
-      <template is="dom-repeat" items="{{teatros}}" as="item">
-        <google-map-marker latitude={{item.geolocalizacion.lng}} longitude={{item.geolocalizacion.lat}} draggable="false" label={{item.nombre}}></google-map-marker>
-      </template>  
-    </google-map>
+      <google-map map={{map}} latitude=[[lat]] longitude=[[lon]] api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" draggable="false"
+        zoom="11">
+        <template is="dom-repeat" items="{{teatros}}" as="item">
+          <google-map-marker latitude={{item.geolocalizacion.lat}} longitude={{item.geolocalizacion.lng}} draggable="false" label={{item.nombre}} title={{item.distancia}}></google-map-marker>
+        </template>
+      </google-map>
       <google-map-marker map={{map}} latitude={{lat}} longitude={{lon}} draggable="false" label="Yo"></google-map-marker>
 
     </div>
 
-    <iron-ajax id="ajaxTeatros" auto url="http://{{host}}:3000/api/Teatros" params='' handle-as="json" on-response="respuestaTeatros"
+    <iron-ajax id="ajaxTeatros" url="http://{{host}}:3000/api/Teatros" params='' handle-as="json" on-response="respuestaTeatros"
       debounce-duration="300"></iron-ajax>
 
   </template>
 
   <script>
+    
     class TeatroscercanosPage extends Polymer.Element {
+      
       static get is() {
         return 'teatroscercanos-page';
       }
@@ -73,9 +76,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         }
       }
+      ready() {
+        super.ready();
+      }
       respuestaTeatros(res) {
         console.log(res);
         this.teatros = res.detail.__data.response;
+        var dist = {
+          DistanceFromLatLonInKm: function(lat1, lon1, lat2, lon2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = (lat2 - lat1) * (Math.PI / 180); // deg2rad below
+            var dLon = (lon2 - lon1) * (Math.PI / 180);
+            var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km
+            return d;
+           }
+          }
+
+        for (var i=0 ; i<this.teatros.length; i++) {
+          this.teatros[i].distancia = parseFloat(dist.DistanceFromLatLonInKm(this.lat, this.lon, this.teatros[i].geolocalizacion.lat, this.teatros[i].geolocalizacion.lng), 2).toFixed(2) + ' KM';
+          console.log(this.lat + ' ' + this.lon +  '/' + this.teatros[i].geolocalizacion.lat + '+' + this.teatros[i].geolocalizacion.lng + '/' + this.teatros[i].distancia);
+        }
+      }
+
+      geoRespuesta(){
+        //Corro el ajax despues degeolocalizar
+        console.log("Entró");
+        //busco ubicacion
+        this.$.ajaxTeatros.generateRequest();
+
       }
     }
     window.customElements.define(TeatroscercanosPage.is, TeatroscercanosPage);
