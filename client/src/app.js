@@ -69,7 +69,8 @@
         
         createRoute('detalle', '/detalle/:evento-id', {}, ROUTE_HOOKS),
         createRoute('teatroscercanos', '/teatroscercanos', {}, ROUTE_HOOKS),
-        createRoute('cajeros', '/cajeros', {}, ROUTE_HOOKS)
+        createRoute('cajeros', '/cajeros', {}, ROUTE_HOOKS),
+        createRoute('login', '/login', {}, ROUTE_HOOKS)
       ];
     }
   
