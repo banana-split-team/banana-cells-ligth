@@ -33,7 +33,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <div>teatroscercanos-page</div>
-    <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
 
     <div class="card">
       <google-map map={{map}} latitude={{LaM}} longitude={{LoM}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" draggable="false"
@@ -48,6 +47,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <iron-ajax id="ajaxTeatros" url="https://{{host}}:3000/api/Teatros" params='' handle-as="json" on-response="respuestaTeatros"
       debounce-duration="300"></iron-ajax>
+    
+    <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta" watch-pos high-accuracy ></geo-location>
 
   </template>
 

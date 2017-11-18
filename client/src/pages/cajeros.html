@@ -36,7 +36,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <div>cajeros-page</div>
-    <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
     
      <google-map map={{map}} latitude={{PLaM}} longitude={{PLoM}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" zoom="14">   
        <template is="dom-repeat" items="{{cajeros.listado.ATM}}" as="marker">
@@ -49,6 +48,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <iron-ajax id="Ajax" url="https://localhost:3000/api/cajeros/listado" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
     
+    <geo-location watch-pos high-accuracy latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
   </template>
 
   <script>
