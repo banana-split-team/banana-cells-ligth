@@ -2,6 +2,7 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var loopbackSSL = require('loopback-ssl');
 
 var app = module.exports = loopback();
 
@@ -11,6 +12,7 @@ var passportConfigurator = new PassportConfigurator(app);
 
 app.start = function() {
   // start the web server
+  return loopbackSSL.startServer(app);
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
@@ -19,6 +21,7 @@ app.start = function() {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
+
   });
 };
 

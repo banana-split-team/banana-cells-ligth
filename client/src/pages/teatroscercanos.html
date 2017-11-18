@@ -46,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </div>
 
-    <iron-ajax id="ajaxTeatros" url="http://{{host}}:3000/api/Teatros" params='' handle-as="json" on-response="respuestaTeatros"
+    <iron-ajax id="ajaxTeatros" url="https://{{host}}:3000/api/Teatros" params='' handle-as="json" on-response="respuestaTeatros"
       debounce-duration="300"></iron-ajax>
 
   </template>
@@ -105,7 +105,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       geoRespuesta(){
         //Corro el ajax despues degeolocalizar
-        console.log("Entró");
+        console.log("Entró : " + this.lat + '-' + this.lon);
         //busco ubicacion
         this.$.ajaxTeatros.generateRequest();
 
