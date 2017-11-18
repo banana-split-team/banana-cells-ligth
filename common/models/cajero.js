@@ -118,7 +118,7 @@ module.exports = function(Cajero) {
 
   Cajero.remoteMethod(
     'listado', {
-      http: {
+      https: {
         path: '/listado',
         verb: 'get',
 

@@ -36,7 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
 
     <div class="card">
-      <google-map map={{map}} latitude=[[lat]] longitude=[[lon]] api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" draggable="false"
+      <google-map map={{map}} latitude={{LaM}} longitude={{LoM}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" draggable="false"
         zoom="11">
         <template is="dom-repeat" items="{{teatros}}" as="item">
           <google-map-marker latitude={{item.geolocalizacion.lat}} longitude={{item.geolocalizacion.lng}} draggable="false" label={{item.nombre}} title={{item.distancia}}></google-map-marker>
@@ -107,6 +107,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //Corro el ajax despues degeolocalizar
         console.log("Entró : " + this.lat + '-' + this.lon);
         //busco ubicacion
+        this.LaM = this.lat;
+        this.LoM = this.lon;
         this.$.ajaxTeatros.generateRequest();
 
       }
