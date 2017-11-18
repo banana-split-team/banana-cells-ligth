@@ -17,6 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/google-map/google-map-poly.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/geo-location/geo-location.html">
+
 <link rel="import" href="../shared-styles.html">
 
 <dom-module id="cajeros-page">
@@ -34,6 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <div>cajeros-page</div>
+    <geo-location latitude="{{lat}}" longitude="{{lon}}" on-geo-response="geoRespuesta"></geo-location>
     
      <google-map map={{map}} latitude={{PLaM}} longitude={{PLoM}} api-key="AIzaSyD3E1D9b-Z7ekrT3tbhl_dy8DCXuIuDDRc" zoom="14">   
        <template is="dom-repeat" items="{{cajeros.listado.ATM}}" as="marker">
@@ -44,10 +47,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      
 
 
-    <iron-ajax id="Ajax" url="http://localhost:3000/api/cajeros/listado" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
-    <iron-ajax id="AjaxL" url="http://localhost:3000/api/ubicaciones/localizacion" handle-as="json" on-response="handleResponseL"
-      debounce-duration="300"></iron-ajax>
-
+    <iron-ajax id="Ajax" url="https://localhost:3000/api/cajeros/listado" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+    
   </template>
 
   <script>
@@ -84,7 +85,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         super.ready();
         console.log("Entró Cajeros");
         //busco ubicacion
-        this.$.AjaxL.generateRequest();
       }
 
       handleResponse(res) {
@@ -114,16 +114,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-      handleResponseL(res) {
-        this.loc = res.detail.__data.response;
-
+      geoRespuesta() {
 
         //hacemos que sea españa...
-        this.LaM = this.loc.localizacion.lat + 74.8;
-        this.LoM = this.loc.localizacion.lng + 54.7;
+        this.LaM = this.lat + 74.8;
+        this.LoM = this.lon + 54.7;
         this.PLaM = this.LaM;
         this.PLoM = this.LoM;
-        console.log(this.loc.localizacion.lat + ' <> ' + this.loc.localizacion.lng);
+        console.log(this.lat + ' <> ' + this.lng);
         console.log(this.LaM + ' -- ' + this.LoM);
 
         this.$.Ajax.params = {

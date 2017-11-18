@@ -104,9 +104,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h2>Sinopsis</h2>
       <p>{{evento.sinopsis}}</p>
     </div>
-    <iron-ajax id="ajaxDetalle" auto url="http://{{host}}:3000/api/Eventos/{{subrouteData.id}} " params='' handle-as="json"
+    <iron-ajax id="ajaxDetalle" auto url="https://{{host}}:3000/api/Eventos/{{subrouteData.id}} " params='' handle-as="json"
       on-response="respuestaDetalle" debounce-duration="300"></iron-ajax>
-      <iron-ajax id="ajaxDetalleT" auto url="http://{{host}}:3000/api/Teatros/{{evento.teatroId}} " params='' handle-as="json"
+      <iron-ajax id="ajaxDetalleT" auto url="https://{{host}}:3000/api/Teatros/{{evento.teatroId}} " params='' handle-as="json"
       on-response="respuestaDetalleT" debounce-duration="300"></iron-ajax>
   </template>
 

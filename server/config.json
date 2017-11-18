@@ -20,5 +20,14 @@
     "cors": false
   },
   "legacyExplorer": false,
-  "logoutSessionsOnSensitiveChanges": true
+  "logoutSessionsOnSensitiveChanges": true,
+  "httpMode": false,
+  "certConfig": {
+    "path": "./",
+    "key": "privatekey.pem",
+    "cert": "certificate.pem",
+    "ca": [],
+    "requestCert": false,
+    "rejectUnauthorized": false
+  }
 }
