@@ -4,7 +4,6 @@ var request = require('request');
 var fs = require('fs');
 var VisaAPIClient = require('../../server/visa/visaapiclient.js');
 var config = require('../../server/config/configuration.json');
-
 var req = request.defaults();
 var userId = config.userId;
 var password = config.password;
@@ -118,7 +117,7 @@ module.exports = function(Cajero) {
 
   Cajero.remoteMethod(
     'listado', {
-      https: {
+      http: {
         path: '/listado',
         verb: 'get',
 
