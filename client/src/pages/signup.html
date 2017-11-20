@@ -9,7 +9,7 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="login-page">
+<dom-module id="signup-page">
     <template>
         <style include="shared-styles">
              :host {
@@ -74,7 +74,7 @@
                 color: white;
             }
         </style>
-        <div>login-page</div>
+        <div>signup-page</div>
         <!--
         <global-variable key="user" 
             value="{{user1}}">
@@ -91,32 +91,40 @@
         <div class="card">
             <paper-input  label="email" value="{{user.email}}"></paper-input>
             <min-length-validator id="min-length-validator" min-length="6"></min-length-validator>
+           
+            <match-passwords-validator id="match-passwords-validator" password="[[user.password]]"></match-passwords-validator>
             <paper-password-input 
                 maxlength=20
                 auto-validate
-                validator="min-length-validator"
-                error-message="Enter at least 6 characters"
                 label="password"
                 value="{{user.password}}">
             </paper-password-input>
+            <paper-password-input 
+                label="confirmar" 
+                auto-validate 
+                validator="match-passwords-validator" 
+                error-message="La contraseñas deben coincidir">                  
+            </paper-password-input>
+
             <!--
             <paper-input always-float-label label="password" value="{{user.password}}"></paper-input>
             -->
             <paper-button raised class="indigo">Cancelar</paper-button>
-            <paper-button on-tap="loguearse" raised class="green">Login</paper-button>
+            <paper-button on-tap="registrarse" raised class="green">Registrame</paper-button>
         </div>
-        
 
+        
         <iron-ajax 
-        id="ajaxlogin"
-        method="POST" 
-        url="https://{{host}}:3000/api/usuarios/login" 
-        params='' 
-        handle-as="json"
-        on-response="respuestalogin"
-        on-error="errorlogin"
-        content-type="application/json"
-        debounce-duration="300"></iron-ajax>
+            id="ajaxsignup" 
+            method="POST"
+            url="https://{{host}}:3000/api/usuarios" 
+            params='' 
+            handle-as="json" 
+            on-response="respuestasignup"
+            on-error="errorSignUp"
+            content-type="application/json"
+            debounce-duration="300">
+        </iron-ajax>
 
     <app-location
         route="{{route}}"
@@ -133,9 +141,9 @@
 
     <script>
        // var data = document.querySelector('#globalData');
-        class LoginPage extends Polymer.Element {
+        class signupPage extends Polymer.Element {
             static get is() {
-                return 'login-page';
+                return 'signup-page';
             }
             static get properties() {
                 return {
@@ -161,34 +169,31 @@
 
                 }
             }
-            loguearse() {
-                this.$.ajaxlogin.body = JSON.stringify({
+            registrarse() {
+                this.$.ajaxsignup.body = JSON.stringify({
                     'email': this.user.email,
                     'password': this.user.password
                 });
-                console.log("logeando usuario y mail: ", this.$.ajaxlogin.body )
-                //this.$.ajaxsinup.set( 'url', "http://"+location.hostname +":3000/api/lugares"); // seteamos la url del back igual a la del front
-                this.$.ajaxlogin.generateRequest();
-                
+                console.log("logeando usuario y mail: ", this.$.ajaxsignup.body )
+                this.$.ajaxsignup.generateRequest();
                 this.user.logueado = true;
             }
 
-            respuestalogin(res) {
+            respuestasignup(res) {
                 Cells.Bus.channel('announce').publish('Bienvenido nuevamente ' + this.user.email);
                 this.user.id=  res.detail.__data.response.userId;
                 this.user.token=  res.detail.__data.response.id;
                 this.user.logueado = true;
              //   this.$.globalData.set("user",this.user)
                 Cells.Bus.channel('user').publish(this.user);
-                Cells.Router.navigate('eventos');
+                Cells.Router.navigate('login');
             }
 
-            errorlogin(res){
-                console.log("Error de login");
-                Cells.Bus.channel('announce').publish('Error al intentar login, revise los datos ingresados');
+            errorsignup(res){
+                Cells.Bus.channel('announce').publish("Error al intentar crear el usuario. Reintente más tarde.");
             }
         }
 
-        window.customElements.define(LoginPage.is, LoginPage);
+        window.customElements.define(signupPage.is, signupPage);
     </script>
 </dom-module>
