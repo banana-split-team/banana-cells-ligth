@@ -104,10 +104,6 @@
             <paper-button raised class="indigo">Cancelar</paper-button>
             <paper-button on-tap="loguearse" raised class="green">Login</paper-button>
         </div>
-        <li>
-            <button on-click="_toggleAuthenticationState">Prueba de event bus</button>
-        </li>
-
 
         <iron-ajax 
         id="ajaxlogin"
@@ -116,6 +112,7 @@
         params='' 
         handle-as="json"
         on-response="respuestalogin"
+        on-error="errorlogin"
         content-type="application/json"
         debounce-duration="300"></iron-ajax>
 
@@ -170,11 +167,12 @@
                 console.log("logeando usuario y mail: ", this.$.ajaxlogin.body )
                 //this.$.ajaxsinup.set( 'url', "http://"+location.hostname +":3000/api/lugares"); // seteamos la url del back igual a la del front
                 this.$.ajaxlogin.generateRequest();
+                
                 this.user.logueado = true;
             }
 
             respuestalogin(res) {
-                Cells.Bus.channel('broadcast').publish('Bienvenido nuevamente: ' + this.user.email + res.detail.__data.response.userId);
+                Cells.Bus.channel('broadcast').publish('Bienvenido nuevamente ' + this.user.email);
                 this.user.id=  res.detail.__data.response.userId;
                 this.user.token=  res.detail.__data.response.id;
                 this.user.logueado = true;
@@ -182,6 +180,10 @@
                 Cells.Router.navigate('eventos');
             }
 
+            errorlogin(res){
+                console.log("Error de login");
+                Cells.Bus.channel('broadcast').publish('Error al intentar login, revise los datos ingresados');
+            }
             _toggleAuthenticationState() {
                 console.log('aye _toggleAuthenticationState');
                 const message = 'Contenido del bus de broadcast!';
