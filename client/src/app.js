@@ -71,7 +71,9 @@
         createRoute('teatroscercanos', '/teatroscercanos', {}, ROUTE_HOOKS),
         createRoute('cajeros', '/cajeros', {}, ROUTE_HOOKS),
         createRoute('login', '/login', {}, ROUTE_HOOKS),
-        createRoute('signup', '/signup', {}, ROUTE_HOOKS)
+        createRoute('signup', '/signup', {}, ROUTE_HOOKS),
+        createRoute('signup-wellcome', '/signup-wellcome', {}, ROUTE_HOOKS)
+
       ];
     }
   

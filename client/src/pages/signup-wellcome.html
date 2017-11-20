@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/global-variable/global-variable.html">
+<link rel="import" href="../../bower_components/global-variable/global-data.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-password-input/paper-password-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="signup-wellcome-page">
+    <template>
+    <style include="shared-styles"  >
+        :host {
+            display: block;
+            padding: 10px;
+        }
+        :host([hidden]) {
+            display: none !important;
+        }
+        a,.card{
+            text-decoration-line: none;
+        }
+        h1{
+            font-size: 1em;
+        }
+        h3{
+            font-size: 0.8em;
+        }
+        .card > *{
+            margin: 1px;
+            align-content: center;
+        }
+        </style>
+    
+    <div on-click="empezar" class="card">
+            <img align=center src="../../images/bananasplit.png">
+            <h1>Bienvenido!</h1>
+            <h3>Ya podes empezar a usar Chicketto.</h3>
+        </div>
+    
+    </template>
+
+    <script>
+        class signupwellcomePage extends Polymer.Element {
+            static get is() {
+                return 'signup-wellcome-page';
+            }
+            static get properties() {
+                return {
+                    /**
+                     * Description for prop
+                     */
+                    user: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                email: "",
+                                password: "",
+                                logueado:false
+                            }
+                        }
+                    },
+                    host: {
+                        type: String,
+                        value: function () {
+                            return location.hostname
+                        }
+                    }
+
+                }
+            }
+            empezar(res) {
+                Cells.Router.navigate('eventos');
+            }
+        }
+
+        window.customElements.define(signupwellcomePage.is, signupwellcomePage);
+    </script>
+</dom-module>

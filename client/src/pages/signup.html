@@ -186,7 +186,7 @@
                 this.user.logueado = true;
              //   this.$.globalData.set("user",this.user)
                 Cells.Bus.channel('user').publish(this.user);
-                Cells.Router.navigate('login');
+                Cells.Router.navigate('signup-wellcome');
             }
 
             errorsignup(res){
