@@ -70,7 +70,7 @@
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
   -->
-    <app-drawer-layout fullbleed narrow="{{narrow}}">
+    <app-drawer-layout fullbleed force-narrow narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar><div>  Menu </div>
@@ -108,7 +108,9 @@
         <div id="app__container"></div>
 
       </app-header-layout>
+     
       <paper-toast id="toast" text="[[announce]]"></paper-toast>
+
     </app-drawer-layout>  
     
   </template>
