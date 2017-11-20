@@ -58,12 +58,13 @@
         font-weight: bold;
       }
     </style>
+<!--
     <global-variable key="user" value="{{user}}">
     </global-variable>
 
     <global-data id="globalData" on-set="_onSet" on-subscribe="_onSubscribe" on-unsubscribe="_onUnsubscribe">
     </global-data>
-<!--
+
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
     </app-location>
 
@@ -116,7 +117,7 @@
   </template>
 
   <script>
-    var data = document.querySelector('#globalData');
+   // var data = document.querySelector('#globalData');
     class AppShell extends Polymer.Element {
       static get is() {
         return 'app-shell';
@@ -142,13 +143,18 @@
       }
       connectedCallback() {
         super.connectedCallback();
-        Cells.Bus.channel('broadcast').subscribe(this._handleAnnouncer.bind(this));
+        Cells.Bus.channel('announce').subscribe(this._handleAnnouncer.bind(this));
+        Cells.Bus.channel('user').subscribe(this._handleLogIn.bind(this));
       }
       _handleAnnouncer(announce) {
         this.set('announce', announce);
         this.$.toast.open();
       }
-
+      _handleLogIn(announce) {
+        this.set('user', announce);
+        console.log(JSON.stringify(announce));
+        this.$.user = announce;
+      }
     }
 
     window.customElements.define(AppShell.is, AppShell);

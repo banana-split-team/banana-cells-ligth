@@ -75,6 +75,7 @@
             }
         </style>
         <div>login-page</div>
+        <!--
         <global-variable key="user" 
             value="{{user1}}">
         </global-variable>
@@ -84,9 +85,9 @@
             on-subscribe="_onSubscribe"
             on-unsubscribe="_onUnsubscribe">
         </global-data>
+    -->
 
         
-
         <div class="card">
             <paper-input  label="email" value="{{user.email}}"></paper-input>
             <min-length-validator id="min-length-validator" min-length="6"></min-length-validator>
@@ -130,7 +131,7 @@
     </template>
 
     <script>
-        var data = document.querySelector('#globalData');
+       // var data = document.querySelector('#globalData');
         class LoginPage extends Polymer.Element {
             static get is() {
                 return 'login-page';
@@ -172,22 +173,23 @@
             }
 
             respuestalogin(res) {
-                Cells.Bus.channel('broadcast').publish('Bienvenido nuevamente ' + this.user.email);
+                Cells.Bus.channel('announce').publish('Bienvenido nuevamente ' + this.user.email);
                 this.user.id=  res.detail.__data.response.userId;
                 this.user.token=  res.detail.__data.response.id;
                 this.user.logueado = true;
-                this.$.globalData.set("user",this.user)
+             //   this.$.globalData.set("user",this.user)
+                Cells.Bus.channel('user').publish(this.user);
                 Cells.Router.navigate('eventos');
             }
 
             errorlogin(res){
                 console.log("Error de login");
-                Cells.Bus.channel('broadcast').publish('Error al intentar login, revise los datos ingresados');
+                Cells.Bus.channel('announce').publish('Error al intentar login, revise los datos ingresados');
             }
             _toggleAuthenticationState() {
                 console.log('aye _toggleAuthenticationState');
                 const message = 'Contenido del bus de broadcast!';
-                Cells.Bus.channel('broadcast').publish('Contenido del bus de broadcast!');
+                Cells.Bus.channel('announce').publish('Contenido del bus de broadcast!');
              }
         }
 
