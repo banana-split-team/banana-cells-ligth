@@ -23,7 +23,8 @@
     "global-variable": "trofrigo/global-variable#^0.1.4",
     "geo-location": "ebidel/geo-location#^2.0.1",
     "cells": "ssh://globaldevtools.bbva.com:7999/CEL/cells.git",
-    "paper-password-input": "Collaborne/paper-password-input#^2.2.0"
+    "paper-password-input": "Collaborne/paper-password-input#^2.2.0",
+    "paper-toast": "PolymerElements/paper-toast#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0",

@@ -104,13 +104,22 @@
             <paper-button raised class="indigo">Cancelar</paper-button>
             <paper-button on-tap="loguearse" raised class="green">Login</paper-button>
         </div>
+        <li>
+            <button on-click="_toggleAuthenticationState">Prueba de event bus</button>
+        </li>
 
 
-
-        <iron-ajax id="ajaxlogin" method="POST" url="https://{{host}}:3000/api/usuarios/login" params='' handle-as="json" on-response="respuestalogin"
+        <iron-ajax 
+        id="ajaxlogin"
+        method="POST" 
+        url="https://{{host}}:3000/api/usuarios/login" 
+        params='' 
+        handle-as="json"
+        on-response="respuestalogin"
         content-type="application/json"
         debounce-duration="300"></iron-ajax>
-           <app-location
+
+    <app-location
         route="{{route}}"
         url-space-regex="^[[rootPath]]">
     </app-location>
@@ -158,21 +167,26 @@
                     'email': this.user.email,
                     'password': this.user.password
                 });
+                console.log("logeando usuario y mail: ", this.$.ajaxlogin.body )
                 //this.$.ajaxsinup.set( 'url', "http://"+location.hostname +":3000/api/lugares"); // seteamos la url del back igual a la del front
                 this.$.ajaxlogin.generateRequest();
-                this.user.legueado = true;
+                this.user.logueado = true;
             }
+
             respuestalogin(res) {
-                console.log(res);
+                Cells.Bus.channel('broadcast').publish('Bienvenido nuevamente: ' + this.user.email + res.detail.__data.response.userId);
                 this.user.id=  res.detail.__data.response.userId;
                 this.user.token=  res.detail.__data.response.id;
                 this.user.logueado = true;
-
                 this.$.globalData.set("user",this.user)
-                this.set('route.path', '/');
-                this.set('routeData.page', 'eventos');
-                
+                Cells.Router.navigate('eventos');
             }
+
+            _toggleAuthenticationState() {
+                console.log('aye _toggleAuthenticationState');
+                const message = 'Contenido del bus de broadcast!';
+                Cells.Bus.channel('broadcast').publish('Contenido del bus de broadcast!');
+             }
         }
 
         window.customElements.define(LoginPage.is, LoginPage);

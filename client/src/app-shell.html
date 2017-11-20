@@ -10,8 +10,8 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/global-variable/global-variable.html">
 <link rel="import" href="../bower_components/global-variable/global-data.html">
-<link rel="import" href="../bower_components/global-variable/global-data.html">
 <link rel="import" href="my-icons.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
 <script src="./app.js"></script>
 
@@ -61,9 +61,9 @@
     <global-variable key="user" value="{{user}}">
     </global-variable>
 
-    <!--<global-data id="globalData" on-set="_onSet" on-subscribe="_onSubscribe" on-unsubscribe="_onUnsubscribe">
+    <global-data id="globalData" on-set="_onSet" on-subscribe="_onSubscribe" on-unsubscribe="_onUnsubscribe">
     </global-data>
-
+<!--
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
     </app-location>
 
@@ -84,7 +84,7 @@
           <a name="eventos" href="/#/">Inicio</a>
           <div hidden$="[[user.logueado]]">
             <a name="login" href="/#/login" hidden$="[[hiden]]">Login</a>
-            <a name="signup" href="/#/signup" hidden$="[[user.logueado]]">Signup</a>
+            <a name="signup" href="/#/signup" hidden$="[[user.logueado]]">Signup aaaah</a>
           </div>
 
           <a name="teatroscercanos" href="/#/teatroscercanos">¿Que teatros hay cerca mio?</a>
@@ -92,6 +92,7 @@
           
 
         </iron-selector>
+        
       </app-drawer>
 
       <!-- Main content -->
@@ -107,6 +108,7 @@
         <div id="app__container"></div>
 
       </app-header-layout>
+      <paper-toast id="toast" text="[[announce]]"></paper-toast>
     </app-drawer-layout>  
     
   </template>
@@ -136,6 +138,15 @@
           },
         };
       }
+      connectedCallback() {
+        super.connectedCallback();
+        Cells.Bus.channel('broadcast').subscribe(this._handleAnnouncer.bind(this));
+      }
+      _handleAnnouncer(announce) {
+        this.set('announce', announce);
+        this.$.toast.open();
+      }
+
     }
 
     window.customElements.define(AppShell.is, AppShell);
